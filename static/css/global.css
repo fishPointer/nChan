@@ -1,0 +1,73 @@
+body {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 10pt;
+  color: #ffffff;
+  margin-bottom: 100px;
+  background: #444f47;
+}
+
+.linkList a {
+  display: block;
+}
+
+.imgFlag {
+  max-width: 16px;
+  max-height: 16px;
+}
+
+.imgLink img, .latestImageCell img, .mediaCell img, .catalogCell img {
+  image-orientation: from-image;
+}
+
+#panelReferences a {
+  display: block;
+}
+
+hr {
+  border-width: 1px medium medium;
+  border-style: solid none none;
+  border-color: #B7C5D9 currentColor currentColor;
+  border-image: none;
+  height: 0px;
+  clear: left;
+}
+
+.finePrint {
+  font-size: 8pt;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.linksPanel {
+  text-align: center;
+}
+
+.linkWrapper a {
+  background: rgba(255, 255, 255, 0.35) none repeat scroll 0% 0%;
+  border: 1px solid #34345C;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: #34345C;
+  display: inline-block;
+  font-size: 10pt;
+  font-weight: bold;
+  line-height: 1.2;
+  margin: 0.2em 0px;
+  outline: 0px none;
+  padding: 0.15em 0.75em 0.25em;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+.linkWrapper a:hover, #jsButton:hover, #formButton:hover, #linkNext:hover,
+  #linkPrevious:hover {
+  background: #34345C;
+  color: #ffffff;
+}

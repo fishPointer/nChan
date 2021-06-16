@@ -1,0 +1,19 @@
+.greenText {
+  color: #789922;
+}
+
+.redText {
+  color: #AF0A0F;
+  font-size: 11pt;
+  font-weight: bold;
+}
+
+span.spoiler {
+  background: black;
+  color: black;
+  padding: 0 1px;
+}
+
+.spoiler:hover {
+  color: white;
+}

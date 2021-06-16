@@ -1,0 +1,346 @@
+.hideLink {
+  color: #000000;
+  background: #ffffff;
+  font-size: 12pt;
+  vertical-align: top;
+}
+
+#divMessage {
+  text-align: center;
+}
+
+.panelBacklinks a {
+  padding-left: 5px;
+  font-size: 8pt;
+}
+
+.selectedCell, #dropzone {
+  top: 5px;
+  background-color: rgba(200, 200, 200, 0.5);
+  margin-bottom: 5px;
+  padding: 10px 0px;
+}
+
+.selectedCell {
+  margin-top: 10px;
+}
+
+#selectedDiv {
+  text-align: left;
+  padding-bottom: 5px;
+}
+
+#dropzone {
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease 0s;
+  border: 2px dashed rgba(125, 125, 125, 0.4);
+}
+
+.removeButton {
+  cursor: pointer;
+  color: rgba(125, 125, 125, 0.5);
+  display: inline-block;
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.removeButton:hover {
+  color: #7D7D7D;
+}
+
+#bannerImage {
+  display: block;
+  border: 1px solid darkgray;
+  margin: 12px auto 0 auto;
+}
+
+figure.page-head {
+  display: block;
+  text-align: center;
+  margin: 1em auto 1em auto;
+}
+
+#labelName, #labelDescription {
+  color: #b00505;
+  font-size: 32pt;
+  font-weight: bold;
+  font-family: tahoma;
+  letter-spacing: -2px;
+  margin: 0.2em 0 0 0;
+}
+
+.aa {
+  font-family: Mona, "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;
+  display: block !important;
+  font-size: 12pt;
+  line-height: 1.1;
+}
+
+.labelLastEdit {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#labelDescription {
+  font-size: 18pt;
+}
+
+.formWrapper {
+  text-align: center;
+}
+
+.form-post {
+  padding: 10px;
+  padding-right: 15px;
+  margin-left: 15px;
+  background: #181818;
+  text-align: left;
+  display: inline-block;
+  background: #181818;
+  border-color: currentColor rgba(17, 136, 17, 0.533)rgba(17, 136, 17, 0.533) currentColor;
+  border-width: medium 1px 1px medium;
+  border-style: none solid solid none;
+}
+
+.form-post2 {
+  padding: 10px;
+  padding-right: 15px;
+  margin-left: 15px;
+  background: #181818;
+  text-align: left;
+  display: inline-block;
+  background: #181818;
+  border-color: currentColor rgba(17, 136, 17, 0.533)rgba(17, 136, 17, 0.533) currentColor;
+  border-width: medium 1px 1px medium;
+  border-style: none solid solid none;
+  white-space: pre-wrap;
+}
+
+.form-post-reply {
+  padding: 10px;
+  padding-right: 15px;
+  margin-left: 50px;
+  background: #181818;
+  text-align: left;
+  display: inline-block;
+  background: #181818;
+  border-color: currentColor rgba(17, 136, 17, 0.533)rgba(17, 136, 17, 0.533) currentColor;
+  border-width: medium 1px 1px medium;
+  border-style: none solid solid none;
+}
+
+.form-post-reply2 {
+  padding: 10px;
+  padding-right: 15px;
+  margin-left: 50px;
+  background: #181818;
+  text-align: left;
+  display: inline-block;
+  background: #181818;
+  border-color: currentColor rgba(17, 136, 17, 0.533) rgba(17, 136, 17, 0.533) currentColor;
+  border-width: medium 1px 1px medium;
+  border-style: none solid solid none;
+  white-space: pre-wrap;
+}
+
+.formLabel {
+  font-weight: bold;
+  float: left;
+  margin-bottom: 2px;
+}
+
+.contentOmissionIndicator {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#fieldSubject, #fieldName, #fieldEmail, #fieldPostingPassword,
+  #fieldMessage, #fieldCaptcha, #flagCombobox {
+  margin-bottom: 2px;
+  width: 100%;
+}
+
+#submitWrapper {
+  font-size: 12px;
+  display: block;
+  position: relative;
+  text-align: left;
+  margin: 0.5em 0px;
+}
+
+#jsButton, #formButton {
+  font: inherit;
+  overflow: visible;
+  text-transform: none;
+  display: inline-block;
+  padding: 0.2em 1em 0.25em;
+  background: rgba(255, 255, 255, 0.35) none repeat scroll 0% 0%;
+  border: 1px solid #34345C;
+  box-sizing: border-box;
+  outline: 0px none;
+  cursor: pointer;
+  color: #34345C;
+  font-weight: bold;
+  font-size: 1.07143rem;
+  line-height: 1.4545em;
+  text-align: center;
+  width: 118px;
+  margin: 0px 5px 0px 0px;
+  vertical-align: middle;
+}
+
+.uploadCell {
+  float: left;
+  margin: 2px;
+}
+
+.panelUploads {
+  min-height: 128px;
+}
+
+.imgExpanded {
+  width: 100%;
+}
+
+#divThreads {
+  padding-left: 10px;
+}
+
+.opCell>.divMessage, .innerPost>.divMessage, .markedPost>.divMessage {
+  clear: both;
+  font-size: 14px;
+  margin-left: 40px;
+  margin-top: 10px;
+  word-wrap: break-word;
+}
+
+.labelOmission {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.formTransfer {
+  clear: both;
+}
+
+.quoteLink {
+  color: #ff0000;
+}
+
+.linkSelf {
+  color: #000000;
+  text-decoration: none;
+}
+
+.linkSelf:hover {
+  color: #ff0000;
+}
+
+.linkQuote {
+  color: #000000;
+  text-decoration: none;
+}
+
+.linkQuote:hover {
+  color: #ff0000;
+}
+
+.innerPost, .markedPost {
+  background-color: #D6DAF0;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  padding-right: 3px;
+  max-width: 100%;
+  border-color: currentColor #B7C5D9 #B7C5D9 currentColor;
+  border-width: medium 1px 1px medium;
+  border-style: none solid solid none;
+  max-width: 100%;
+}
+
+.quoteTooltip .innerPost {
+  border-style: solid solid solid solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #B7C5D9 #B7C5D9 #B7C5D9 #B7C5D9;
+}
+
+.markedPost {
+  background-color: #D6BAD0;
+}
+
+.linkName {
+  font-weight: bold;
+  color: #0F0C5D;
+  font-size: 10pt;
+}
+
+.linkName:hover {
+  color: #ff0000;
+}
+
+.noEmailName, .noEmailName:hover {
+  color: #117743;
+}
+
+.labelSubject {
+  color: #0F0C5D;
+  font-weight: bold;
+  font-size: 10pt;
+}
+
+.labelRole {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 10pt;
+}
+
+.contentAction {
+  float: left;
+  margin-bottom: 20px;
+}
+
+.divRefresh {
+  float: right;
+}
+
+.divBanMessage {
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 11pt;
+}
+
+.navWrapper {
+  color: #89A;
+  display: inline-block;
+  margin: 0px 1em;
+}
+
+#divPages a {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: 110%;
+  color: #34345C;
+  text-decoration: none;
+  text-align: center;
+  text-decoration: none;
+}
+
+#linkNext, #linkPrevious {
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  background: rgba(255, 255, 255, 0.35) none repeat scroll 0% 0%;
+  border: 1px solid #34345C;
+  box-sizing: border-box;
+  outline: 0px none;
+  cursor: pointer;
+  color: #34345C;
+  font-size: 1.07143rem;
+  display: inline-block;
+  margin: 0.2em 0px;
+  padding: 0.15em 0.75em 0.25em;
+}

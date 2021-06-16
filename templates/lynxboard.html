@@ -1,0 +1,184 @@
+{% extends "base.html" %} 
+
+
+{% block linkpanel %}
+
+<head>
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="index.rss"
+  title="RSS">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/posting.css')}}">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/global.css')}}">
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{url_for('static', filename='css/markdown.css')}}">
+<meta charset="UTF-8">
+
+</head>
+
+{% endblock %} 
+
+{% block content %}
+
+
+<body>
+
+
+
+
+
+ <!--  BANNER IMAGE, needs centering CSS   -->
+  <img id="bannerimage">
+
+
+<!--  BOARD TITLE AND DESCRIPTION   -->
+  <figure class="page-head">
+    <h1 id="labelName">{{boardtitle}}</h1>
+    <h3 id="labelDescription">{{boarddesc}}</h3>
+  </figure>
+
+
+  <br>
+
+
+
+  <!--  DIVIDER   -->
+  <div id="panelMessage">
+    <hr>
+    <div id="divMessage"></div>
+    <hr>
+  </div>
+
+
+  <section class="formWrapper">
+
+        <!--  BEGINNING OF POST FORM   -->
+    <form
+      class="form-post"
+      action="{{url}}"
+      method="POST">
+
+        <!--  NEW THREAD LABEL   -->
+      <span class="formLabel">New Thread:</span>
+      <br>
+
+      <input
+        type="text"
+        placeholder="Subject"
+        id="fieldSubject"
+        name="subject" />
+
+      <div id="divName">
+
+        <input
+          placeholder="Username"
+          type="text"
+          id="fieldName"
+          name="username" />
+
+        <br>     
+      </div>
+      <!--  REMOVE THIS MAYBE?   -->
+
+      <!--  POST AREA   -->
+      <textarea
+        rows="8"
+        cols="50"
+        placeholder="Message"
+        name="message"
+        id="fieldMessage"></textarea>
+      <br>
+
+
+      <!--  FILE UPLOAD   -->
+      <div id="divUpload">
+        <span class="formLabel">Files:</span>
+        <br>
+        <div
+          style="display: none;"
+          id="dragAndDropDiv">
+          <div id="dropzone">Drag files to upload or click here to select
+            them</div>
+          <div id="selectedDiv"></div>
+        </div>
+        <input
+          type="file"
+          id="inputFiles"
+          name="files"
+          multiple>
+      </div>
+
+      
+
+      <div id="submitWrapper">
+
+        <button
+          type="submit"
+          href="{{url}}"
+          id="formButton">Create thread</button>
+      </div>
+
+    </form>
+  </section>
+  <br/> <br/>
+
+
+{% for chanthread in chanthreads %} 
+
+<section class="form-post2"><span class="formLabel">{{chanthread.username}} - {{chanthread.subject}}:{{chanthread.parentthread}} - {{chanthread.timestamp}} - <a href="{{url}}{{chanthread.postid}}">#>>{{chanthread.postid}}</a>
+{% if chanthread.linknumber %} Links To: <a href="{{url}}{{chanthread.linknumber}}">>>{{chanthread.linknumber}}</a> </span>
+{% else %}</span>{% endif %}
+
+<p>{{chanthread.message}}</p></section><br/> <br/>
+
+
+
+{% for childpost in childposts%}
+
+{% if chanthread.postid == childpost.parentthread %}
+
+<!--REPLY TO THREAD-->
+<div class="form-post-reply2"><span class="formLabel">{{childpost.username}} - {{childpost.subject}}:{{childpost.parentthread}} - {{childpost.timestamp}} - <a href="{{url}}{{chanthread.postid}}">#>>{{childpost.postid}}</a>
+{% if childpost.linknumber %} Links To: <a href="{{url}}{{childpost.linknumber}}">>>{{childpost.linknumber}}</a> </span>
+{% else %}</span>{% endif %}
+
+<p>{{childpost.message}}</p> </div> <br/> <br/> 
+{% endif %}
+
+
+{% endfor %} 
+{% endfor %} 
+
+
+
+
+
+
+
+  </form>
+
+  <br>
+  <div class="navWrapper">
+    <a id="linkPrevious">&lt;</a>
+  </div>
+  [
+  <span id="divPages"></span> ]
+  <div class="navWrapper">
+    <a id="linkNext">&gt;</a>
+  </div>
+  <br>
+
+</body>
+
+{% endblock %}
