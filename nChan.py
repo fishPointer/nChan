@@ -7,8 +7,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 #EXTERNAL URLS
-breadnetUI = "http://192.168.0.193:1880/ui/#!/0?socketid=ORy9Al6z5wH2EcU3AAEx"
-breadnetBackend = "http://192.168.0.193:1880/#flow/c507523e.fee05"
+breadnetUI = "http://96.38.188.104:1880/ui"
+breadnetBackend = "http://96.38.188.104:1880/"
 eeininfo = "https://eein.info/"
 
 #INITIALIZE DB AND FLASK
@@ -80,6 +80,27 @@ class lsBoard(db.Model):
     def __repr__(self):
         return '<Name %r>' % self.postid 
 
+#PROJECT NOTES - BOARD #4 - PN
+class pnBoard(db.Model):
+    postid = db.Column(db.Integer, primary_key=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    username = db.Column(db.String(16), nullable=False, default="Anonymous")
+    subject = db.Column(db.String(64), default="[No Subject]")
+    message = db.Column(db.String(8192), nullable=False)
+    linknumber = db.Column(db.String(16))
+    parentthread = db.Column(db.Integer)
+    recentreply = db.Column(db.Integer, default=postid)
+
+    def __init__(self, username, subject, message, linknumber, parentthread):
+        self.username = username
+        self.subject = subject
+        self.message = message
+        self.linknumber = linknumber
+        self.parentthread = parentthread
+
+    def __repr__(self):
+        return '<Name %r>' % self.postid 
+
 #INIT
 db.create_all()
 
@@ -112,8 +133,8 @@ def home():
 #SP BOARD
 @app.route('/sp/', methods=["POST", "GET"])
 def sprint():
-    title = "SPRINT & PROJECT NOTES"
-    desc = "TOMBOY SUPREMACY"
+    title = "SPRINT NOTES"
+    desc = "KAIZEN"
     url = '/sp/'
     parentthread = 0
 
@@ -161,8 +182,8 @@ def sprint():
 
 @app.route('/sp/<int:postid>', methods=["POST", "GET"])
 def sprintthread(postid):
-    title = "SPRINT & PROJECT NOTES"
-    desc = "TOMBOY SUPREMACY"
+    title = "SPRINT NOTES"
+    desc = "KAIZEN"
     boardurl = '/sp/'
     url = '/sp/' + str(postid)
     threadnumber = spBoard.query.get_or_404(postid)
@@ -384,9 +405,97 @@ def miscthread(postid):
         childposts = lsBoard.query.filter_by(parentthread=postid)
         return render_template('lynxthread.html', boardtitle=title, boarddesc=desc, url=url, boardurl=boardurl, chanthreads=chanthreads, childposts=childposts)
 
+####################
 
+#PN BOARD
+@app.route('/pn/', methods=["POST", "GET"])
+def notes():
+    title = "PROJECT NOTES"
+    desc = "TOMBOY SUPREMACY"
+    url = '/pn/'
+    parentthread = 0
 
+    #POST SEQUENCE - New Thread
+    if request.method == "POST":
+        post_username = request.form['username']
+        post_subject = request.form['subject']
+        post_message = request.form['message']
+        if not post_username:
+            post_username = 'Anonymous'
+        if not post_subject:
+            post_subject = '[No Subject]'
 
+        #Parse Message String for Postlinks
+        extracted_link = linkchecker(post_message)
+
+        #Declare Database Object 
+        newpost = pnBoard(post_username, post_subject, post_message, extracted_link, parentthread)
+
+        #Attempt committing to DB and reload as GET
+        try:
+            #Add the new post
+            db.session.add(newpost)
+            db.session.commit()
+            #Set new thread's recent reply to its own post ID so it bumps
+            newpost.recentreply = newpost.postid
+            db.session.commit()
+            return redirect(url)
+        except: 
+            return "Failed to Post to Database"
+
+    else:
+        #GET method
+        #Filter for Threads by descending bump
+        chanthreads = pnBoard.query.filter(pnBoard.parentthread==0).order_by(pnBoard.recentreply.desc())
+
+        #Pull each thread's recent reply into a list
+        childposts = []
+        for chanthread in chanthreads:
+            tag = chanthread.recentreply
+            childposts.append(pnBoard.query.get(tag))
+        
+        #Pass Parent and Child post lists into render function
+        return render_template('lynxboard.html', boardtitle=title, boarddesc=desc, url=url, chanthreads=chanthreads, childposts=childposts)
+
+@app.route('/pn/<int:postid>', methods=["POST", "GET"])
+def notesthread(postid):
+    title = "PROJECT NOTES"
+    desc = "TOMBOY SUPREMACY"
+    boardurl = '/pn/'
+    url = '/pn/' + str(postid)
+    threadnumber = pnBoard.query.get_or_404(postid)
+    parentthread = postid
+
+    #POST method - Reply to Thread <postid>
+    if request.method == "POST":
+        post_username = request.form['username']
+        post_message = request.form['message']
+        post_subject = 'Reply'
+        if not post_username:
+            post_username = 'Anonymous'
+
+        #Parse Message String for Postlinks
+        extracted_link = linkchecker(post_message)
+
+        #Declare Database Object
+        newpost = pnBoard(post_username, post_subject, post_message, extracted_link, parentthread)
+
+        #Attempt committing to DB and reload as GET
+        try:
+            db.session.add(newpost)
+            db.session.commit()
+            #Pull parent thread and update recentreply attribute
+            oppost = pnBoard.query.get(parentthread)
+            oppost.recentreply = newpost.postid
+            db.session.commit()
+            return redirect(url)
+        except: 
+            return "Failed to Post to Database"
+    else:
+        #Filter threads by given postid and replies by parentthread, and render
+        chanthreads = pnBoard.query.filter_by(postid=parentthread)
+        childposts = pnBoard.query.filter_by(parentthread=postid)
+        return render_template('lynxthread.html', boardtitle=title, boarddesc=desc, url=url, boardurl=boardurl, chanthreads=chanthreads, childposts=childposts)
 
 
 
